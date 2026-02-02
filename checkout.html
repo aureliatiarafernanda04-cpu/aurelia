@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+
+<html lang="id">  
+<head>  
+  <meta charset="UTF-8">  
+  <title>Checkout</title>  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+  <style>  
+    body {  
+      margin: 0;  
+      font-family: Poppins,sans-serif;  
+      background: #f5efe8;  
+      display: flex;  
+      justify-content: center;  
+      align-items: center;  
+      height: 100vh;  
+    }  
+    .box {  
+      background: white;  
+      padding: 40px;  
+      border-radius: 24px;  
+      text-align: center;  
+      animation: pop .6s ease;  
+    }  
+    @keyframes pop {  
+      from {  
+        transform: scale(.5);  
+        opacity: 0  
+      }  
+      to {  
+        transform: scale(1)  
+      }  
+    }  
+  </style>  
+</head>  
+<body>  
+  <a href="index.html">Kembali ke Beranda</a>  
+  <body>  <div class="box">  
+  <h2>✅ Checkout Berhasil</h2>  
+  <p>  
+    Terima kasih sudah melihat karya kami 💕  
+  </p>  
+  <a href="index.html">Kembali</a>  
+</div>  
+
+<script>  
+  localStorage.setItem("keranjang", "[]");  
+</script>  
+
+<script>  
+  function checkout() {  
+    location.href = "checkout.html";  
+  }  
+</script>
+
+  </body>  
+</html>

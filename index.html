@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+
+<html lang="id">  
+<head>  
+<meta charset="UTF-8">  
+<meta name="viewport" content="width=device-width, initial-scale=1.0">  
+<title>KARYANYA - Kerajinan Tradisional</title>  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@400;500&display=swap" rel="stylesheet">  <style>  
+:root{  
+  --coklat:#8B5E3C;  
+  --krem:#F6EFE7;  
+  --gelap:#3E2C1C;  
+  --aksen:#C97C5D;  
+}  
+  
+*{box-sizing:border-box}  
+  
+body{  
+  margin:0;  
+  font-family:'Poppins',sans-serif;  
+  background:var(--krem);  
+  color:var(--gelap);  
+}  
+  
+/* CREDIT KECIL */  
+.credit{  
+  font-size:12px;  
+  text-align:center;  
+  opacity:.6;  
+  animation:wiggle 4s infinite;  
+}  
+@keyframes wiggle{  
+  0%,100%{transform:rotate(0)}  
+  25%{transform:rotate(.5deg)}  
+  75%{transform:rotate(-.5deg)}  
+}  
+  
+/* HEADER */  
+header{  
+  background:#FFF8F0;  
+  padding:14px 24px;  
+  box-shadow:0 2px 6px rgba(0,0,0,.1);  
+  position:sticky;  
+  top:0;  
+  z-index:20;  
+}  
+nav{  
+  display:flex;  
+  justify-content:space-between;  
+  align-items:center;  
+}  
+nav ul{  
+  list-style:none;  
+  display:flex;  
+  gap:18px;  
+  margin:0;  
+  padding:0;  
+}  
+nav a{text-decoration:none;color:var(--gelap);font-weight:500}  
+  
+/* CART ICON */  
+.cart-icon{  
+  cursor:pointer;  
+  font-size:18px;  
+  position:relative;  
+}  
+  
+/* POPUP KERANJANG */  
+.cart-popup{  
+  position:fixed;  
+  inset:0;  
+  background:rgba(0,0,0,.35);  
+  display:flex;  
+  align-items:center;  
+  justify-content:center;  
+  opacity:0;  
+  pointer-events:none;  
+  transition:.4s ease;  
+  z-index:999;  
+}  
+.cart-popup.show{  
+  opacity:1;  
+  pointer-events:auto;  
+}  
+.cart-box{  
+  background:#FFF8F0;  
+  padding:28px 24px;  
+  border-radius:18px;  
+  text-align:center;  
+  width:260px;  
+  animation:pop .5s ease;  
+}  
+.cart-emoji{  
+  font-size:40px;  
+  animation:bounce 1.5s infinite;  
+}  
+.cart-box h3{  
+  margin:10px 0 6px;  
+  font-family:'Playfair Display',serif;  
+}  
+.cart-box button{  
+  margin-top:14px;  
+  border:none;  
+  background:var(--coklat);  
+  color:white;  
+  padding:8px 18px;  
+  border-radius:20px;  
+  cursor:pointer;  
+}  
+@keyframes pop{  
+  from{transform:scale(.7);opacity:0}  
+  to{transform:scale(1);opacity:1}  
+}  
+@keyframes bounce{  
+  0%,100%{transform:translateY(0)}  
+  50%{transform:translateY(-6px)}  
+}  
+  
+/* CART PANEL */  
+.cart-panel{  
+  position:fixed;  
+  right:14px;  
+  top:70px;  
+  width:240px;  
+  background:#FFF8F0;  
+  border-radius:14px;  
+  padding:14px;  
+  box-shadow:0 8px 20px rgba(0,0,0,.15);  
+  opacity:0;  
+  transform:translateY(-10px);  
+  pointer-events:none;  
+  transition:.3s ease;  
+  z-index:998;  
+}  
+.cart-panel.show{  
+  opacity:1;  
+  transform:translateY(0);  
+  pointer-events:auto;  
+}  
+.cart-panel ul{  
+  padding-left:16px;  
+  font-size:13px;  
+  margin:0;  
+}  
+.cart-panel li{  
+  margin:4px 0;  
+}  
+.cart-total{  
+  margin-top:8px;  
+  font-weight:bold;  
+}  
+  
+/* HERO */  
+.hero{  
+  display:flex;  
+  flex-wrap:wrap;  
+  gap:30px;  
+  align-items:center;  
+  padding:60px 30px;  
+  background:var(--coklat);  
+  color:white;  
+}  
+.hero img{  
+  max-width:360px;  
+  border-radius:16px;  
+  box-shadow:0 12px 25px rgba(0,0,0,.3);  
+}  
+.hero h1{  
+  font-family:'Playfair Display',serif;  
+  font-size:36px;  
+  animation:fadeUp 1.2s ease forwards;  
+}  
+.hero p{  
+  animation:fadeUp 1.2s ease .2s forwards;  
+  opacity:0;  
+}  
+@keyframes fadeUp{  
+  from{opacity:0;transform:translateY(25px)}  
+  to{opacity:1;transform:translateY(0)}  
+}  
+  
+/* SECTION */  
+section{padding:55px 30px}  
+h2{font-family:'Playfair Display',serif;margin-bottom:15px;}  
+  
+/* FILTER */  
+.filter-btns{  
+  display:flex;  
+  gap:10px;  
+  flex-wrap:wrap;  
+  margin-bottom:25px;  
+}  
+.filter-btns button{  
+  border:1px solid var(--coklat);  
+  background:none;  
+  padding:8px 16px;  
+  border-radius:20px;  
+  cursor:pointer;  
+}  
+.filter-btns button.active{  
+  background:var(--coklat);  
+  color:white;  
+}  
+  
+/* GRID */  
+.grid{  
+  display:grid;  
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));  
+  gap:25px;  
+}  
+  
+/* CARD + STAGGER */  
+.card{  
+  background:#FFFDF9;  
+  border-radius:16px;  
+  padding:15px;  
+  text-align:center;  
+  box-shadow:0 6px 14px rgba(0,0,0,.08);  
+  opacity:0;  
+  transform:translateY(40px);  
+  transition:.6s ease;  
+}  
+.card.show{  
+  opacity:1;  
+  transform:translateY(0);  
+}  
+.card:hover{  
+  transform:translateY(-6px);  
+  box-shadow:0 12px 22px rgba(0,0,0,.12);  
+}  
+.card img{  
+  width:100%;  
+  height:160px;  
+  object-fit:cover;  
+  border-radius:12px;  
+}  
+  
+/* BUTTON */  
+.add-to-cart{  
+  background:var(--coklat);  
+  color:white;  
+  border:none;  
+  padding:8px 16px;  
+  border-radius:8px;  
+  cursor:pointer;  
+  margin-top:8px;  
+}  
+.add-to-cart:active{transform:scale(.95)}  
+  
+footer{  
+  background:var(--gelap);  
+  color:white;  
+  padding:20px;  
+  text-align:center;  
+}  
+  
+/* MOBILE */  
+@media(max-width:600px){  
+  .hero h1{font-size:28px}  
+  .cart-panel{width:200px}  
+}  
+</style>  </head>  <body>  <a href="halaman2.html">karya nya</a>
+
+<body>  <div class="credit">by aurelia Tiara Fernanda XII-4/05 ✨</div>  <header>  
+<nav>  
+<h2>KARYANYA</h2>  
+<ul>  
+<li><a href="#home">Home</a></li>  
+<li><a href="#produk">Produk</a></li>  
+<li class="cart-icon" onclick="toggleCart()">🧺 <span id="cartCount">0</span></li>  
+</ul>  
+</nav>  
+</header>  <!-- HERO -->  <section class="hero" id="home">  
+<div>  
+<h1>Kerajinan Tradisional Indonesia</h1>  
+<p>Setiap karya punya cerita budaya.</p>  
+</div>  
+<!-- Gambar statis dari Picsum ID supaya pasti muncul -->  
+<img src="https://picsum.photos/id/1062/500/400" alt="Kerajinan">  
+</section>  <!-- KATEGORI -->  <section>  
+<h2>Kategori</h2>  
+<div class="grid">  
+<div class="card anyaman">  
+<img src="https://picsum.photos/id/1025/400/300" alt="Anyaman">  
+<h3>Anyaman</h3>  
+</div>  
+<div class="card batik">  
+<img src="https://picsum.photos/id/1059/400/300" alt="Batik">  
+<h3>Batik</h3>  
+</div>  
+<div class="card songket">  
+<img src="https://picsum.photos/id/1040/400/300" alt="Songket">  
+<h3>Songket</h3>  
+</div>  
+</div>  
+</section>  <!-- PRODUK -->  <section id="produk">  
+<h2>Produk Unggulan</h2>  <div class="filter-btns">  
+<button class="active" onclick="filterItem('all')">Semua</button>  
+<button onclick="filterItem('anyaman')">Anyaman</button>  
+<button onclick="filterItem('batik')">Batik</button>  
+<button onclick="filterItem('songket')">Songket</button>  
+</div>  <div class="grid">  <!-- 1 -->  <div class="card anyaman product-card">  
+<img src="https://picsum.photos/id/103/400/300" alt="Tatakan Anyaman">  
+<h3>Tatakan Gelas Anyaman</h3>  
+<button class="add-to-cart" onclick="addCart('Tatakan Gelas Anyaman',10000)">Tambah</button>  
+</div>  <!-- 2 -->  <div class="card batik product-card">  
+<img src="https://picsum.photos/id/1067/400/300" alt="Hiasan Dinding">  
+<h3>Hiasan Dinding</h3>  
+<button class="add-to-cart" onclick="addCart('Hiasan Dinding',15000)">Tambah</button>  
+</div>  <!-- 3 -->  <div class="card anyaman product-card">  
+<img src="https://picsum.photos/id/1070/400/300" alt="Makrame">  
+<h3>Makrame</h3>  
+<button class="add-to-cart" onclick="addCart('Makrame',50000)">Tambah</button>  
+</div>  <!-- 4 -->  <div class="card anyaman product-card">  
+<img src="https://picsum.photos/id/1050/400/300" alt="Aksesoris Tangan">  
+<h3>Aksesoris Tangan</h3>  
+<button class="add-to-cart" onclick="addCart('Aksesoris Tangan',5000)">Tambah</button>  
+</div>  <!-- 5 -->  <div class="card batik product-card">  
+<img src="https://picsum.photos/id/1084/400/300" alt="Wayang Kulit">  
+<h3>Wayang Kulit</h3>  
+<button class="add-to-cart" onclick="addCart('Wayang Kulit',50000)">Tambah</button>  
+</div>  <!-- 6 -->  <div class="card batik product-card">  
+<img src="https://picsum.photos/id/1043/400/300" alt="Patung 3D">  
+<h3>Patung 3D</h3>  
+<button class="add-to-cart" onclick="addCart('Patung 3D',20000)">Tambah</button>  
+</div>  <!-- 7 -->  <div class="card songket product-card">  
+<img src="https://picsum.photos/id/1057/400/300" alt="Lukisan">  
+<h3>Lukisan</h3>  
+<button class="add-to-cart" onclick="addCart('Lukisan',30000)">Tambah</button>  
+</div>  </div>  
+</section>  <!-- CART PANEL -->  <div id="cartPanel" class="cart-panel">  
+  <h4>Keranjang</h4>  
+  <ul id="cartItems"></ul>  
+  <p class="cart-total">Total: Rp <span id="cartTotal">0</span></p>  
+</div>  <!-- POPUP KERANJANG -->  <div id="cartPopup" class="cart-popup">  
+  <div class="cart-box">  
+    <div class="cart-emoji">🧺✨</div>  
+    <h3>Masuk Keranjang!</h3>  
+    <p>Produk kerajinan berhasil ditambahkan</p>  
+    <button onclick="closePopup()">Oke 💕</button>  
+  </div>  
+</div>  <!-- SUARA TING -->  <audio id="tingSound">  
+  <source src="https://assets.mixkit.co/sfx/preview/mixkit-software-interface-start-2574.mp3" type="audio/mpeg">  
+</audio>  <footer>  
+  <p>© 2026 KARYANYA</p>  
+  <p class="credit">by Aurelia Tiara Fernanda XII-4/05 💖</p>  
+</footer>  <script>  
+/* STAGGER SCROLL ANIMATION */  
+const cards=document.querySelectorAll('.card');  
+const observer=new IntersectionObserver(entries=>{  
+  entries.forEach((entry,i)=>{  
+    if(entry.isIntersecting){  
+      entry.target.style.transitionDelay = `${i*0.12}s`;  
+      entry.target.classList.add('show');  
+    }  
+  });  
+},{threshold:.15});  
+cards.forEach(c=>observer.observe(c));  
+  
+/* FILTER */  
+function filterItem(k){  
+  const btns=document.querySelectorAll('.filter-btns button');  
+  btns.forEach(b=>b.classList.remove('active'));  
+  event.target.classList.add('active');  
+  
+  cards.forEach(card=>{  
+    if(k==='all' || card.classList.contains(k)){  
+      card.style.display='block';  
+    } else {  
+      card.style.display='none';  
+    }  
+  });  
+}  
+  
+/* CART + POPUP + SOUND */  
+let cartCount=0;  
+let total=0;  
+  
+const list=document.getElementById("cartItems");  
+const totalText=document.getElementById("cartTotal");  
+const countText=document.getElementById("cartCount");  
+const panel=document.getElementById("cartPanel");  
+const ting=document.getElementById("tingSound");  
+const popup=document.getElementById("cartPopup");  
+  
+function addCart(name,price){  
+  cartCount++;  
+  total+=price;  
+  
+  const li=document.createElement("li");  
+  li.textContent=name+" - Rp "+price.toLocaleString();  
+  list.appendChild(li);  
+  
+  countText.innerText=cartCount;  
+  totalText.innerText=total.toLocaleString();  
+  
+  // suara  
+  ting.currentTime=0;  
+  ting.play();  
+  
+  // tampil popup  
+  popup.classList.add("show");  
+}  
+  
+function closePopup(){  
+  popup.classList.remove("show");  
+}  
+  
+function toggleCart(){  
+  panel.classList.toggle("show");  
+}  
+</script>  function checkout(){
+location.href = "checkout.html";
+}
+</script>
+
+</body>  
+</html>"

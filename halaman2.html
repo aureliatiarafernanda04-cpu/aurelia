@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+
+<html lang="id">  
+<head>  
+<meta charset="UTF-8">  
+<title>KARYA NYA</title>  
+<meta name="viewport" content="width=device-width, initial-scale=1.0">  
+<style>  
+*{box-sizing:border-box}  
+body{  
+  margin:0;  
+  font-family:Poppins,sans-serif;  
+  background:#f5efe8;  
+}  
+header{  
+  text-align:center;  
+  padding:40px 20px;  
+}  
+h1{animation:ketik 1.2s ease}  
+@keyframes ketik{  
+  from{opacity:0;letter-spacing:8px}  
+  to{opacity:1;letter-spacing:2px}  
+}  
+.filter{  
+  text-align:center;  
+  margin-bottom:20px;  
+}  
+.filter button{  
+  margin:4px;  
+  padding:8px 18px;  
+  border:none;  
+  border-radius:20px;  
+  background:#d7b58a;  
+}  
+.produk{  
+  display:grid;  
+  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));  
+  gap:16px;  
+  padding:20px;  
+}  
+.card{  
+  background:white;  
+  padding:14px;  
+  border-radius:16px;  
+  text-align:center;  
+  box-shadow:0 8px 16px rgba(0,0,0,.1);  
+  animation:fadeUp .6s ease;  
+}  
+.card button{  
+  margin-top:8px;  
+  padding:6px 14px;  
+  border:none;  
+  border-radius:14px;  
+  background:#8b5e3c;  
+  color:white;  
+}  
+#cart{  
+  position:fixed;  
+  right:10px;  
+  bottom:10px;  
+  width:260px;  
+  background:white;  
+  border-radius:18px;  
+  padding:12px;  
+}  
+.cart-item{  
+  font-size:13px;  
+  display:flex;  
+  justify-content:space-between;  
+}  
+.total{font-weight:bold;text-align:center;margin:6px 0}  
+.cart-btn{  
+  width:100%;  
+  margin-top:6px;  
+  border:none;  
+  padding:8px;  
+  border-radius:14px;  
+  background:#c29a6d;  
+}  
+@keyframes fadeUp{  
+  from{opacity:0;transform:translateY(20px)}  
+  to{opacity:1}  
+}  
+footer{  
+  text-align:center;  
+  font-size:12px;  
+  padding:20px;  
+}  
+</style>  
+</head>  
+<body>  <header>  
+  <h1>KARYA NYA ✨</h1>  
+</header>  <div class="filter">  
+  <button onclick="filter('all')">Semua</button>  
+  <button onclick="filter('rajut')">Rajut</button>  
+  <button onclick="filter('rotan')">Rotan</button>  
+  <button onclick="filter('bambu')">Bambu</button>  
+</div>  <section class="produk" id="produk"></section>  <div id="cart">  
+  <h3>🧺 Keranjang</h3>  
+  <div id="items"></div>  
+  <div class="total" id="total">Rp0</div>  
+  <button class="cart-btn" onclick="checkout()">Checkout</button>  
+  <button class="cart-btn" onclick="clearCart()">Clear</button>  
+</div>  <audio id="ting">  
+  <source src="https://assets.mixkit.co/sfx/preview/mixkit-positive-interface-beep-221.mp3">  
+</audio>  <footer>  
+  by aurelia Tiara Fernanda XII-4/05 💫  
+</footer>  <script>  
+const data=[  
+ {n:"Kursi Lipat",h:30000,k:"bambu"},  
+ {n:"Sarung Tangan Rajut",h:20000,k:"rajut"},  
+ {n:"Jaket Rajut",h:55000,k:"rajut"},  
+ {n:"Karpet Rajut",h:25000,k:"rajut"},  
+ {n:"Tempat Sampah Rotan",h:15000,k:"rotan"},  
+ {n:"Wayang Kulit",h:40000,k:"rotan"},  
+ {n:"Lukisan",h:30000,k:"rotan"},  
+   
+];  
+  
+let cart=JSON.parse(localStorage.getItem("keranjang"))||[];  
+  
+function render(list){  
+  produk.innerHTML="";  
+  list.forEach(p=>{  
+    produk.innerHTML+=`  
+    <div class="card">  
+      <h4>${p.n}</h4>  
+      <p>Rp${p.h.toLocaleString()}</p>  
+      <button onclick="add('${p.n}',${p.h})">Tambah</button>  
+    </div>`;  
+  });  
+}  
+render(data);  
+  
+function filter(k){  
+  render(k==="all"?data:data.filter(x=>x.k===k));  
+}  
+function add(n,h){  
+  cart.push({n,h});  
+  localStorage.setItem("keranjang",JSON.stringify(cart));  
+  ting.play();  
+  draw();  
+}  
+function draw(){  
+  items.innerHTML="";  
+  let t=0;  
+  cart.forEach((i,idx)=>{  
+    t+=i.h;  
+    items.innerHTML+=`  
+    <div class="cart-item">  
+      ${i.n}  
+      <button onclick="del(${idx})">x</button>  
+    </div>`;  
+  });  
+  total.innerText="Rp"+t.toLocaleString();  
+}  
+draw();  
+function del(i){  
+  cart.splice(i,1);  
+  localStorage.setItem("keranjang",JSON.stringify(cart));  
+  draw();  
+}  
+function clearCart(){  
+  cart=[];  
+  localStorage.setItem("keranjang","[]");  
+  draw();  
+}  
+function checkout(){  
+  location.href="checkout.html";  
+}  
+</script>  </body>  
+</html>"
